@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Početna | Caffee Arabika</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .menu-btn { display: none; flex-direction: column; gap: 5px; cursor: pointer; z-index: 10001; }
+        .menu-btn span { display: block; width: 30px; height: 3px; background: var(--gold); transition: 0.3s; }
+        @media (max-width: 768px) {
+            .menu-btn { display: flex; }
+            nav ul { position: fixed; top: 0; right: -100%; width: 70%; height: 100vh; background: rgba(5, 5, 5, 0.98); backdrop-filter: blur(20px); display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 30px; transition: 0.5s cubic-bezier(0.4, 0, 0.2, 1); border-left: 1px solid var(--gold-muted); }
+            nav ul.active { right: 0; }
+            nav ul li a { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo-text" onclick="location.href='index.html'">CAFFEE <span>ARABIKA</span></div>
+        <div class="menu-btn" id="menuBtn"><span></span><span></span><span></span></div>
+        <ul id="navLinks">
+            <li><a href="index.html" class="active">Početna</a></li>
+            <li><a href="meni.html">Meni</a></li>
+            <li><a href="galerija.html">Galerija</a></li>
+            <li><a href="o-nama.html">O nama</a></li>
+            <li><a href="kontakt.html">Kontakt</a></li>
+        </ul>
+    </nav>
+    <section class="container" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+        <h1 class="hero-title reveal">DOBRODOŠLI U <span class="akcent">ARABIKU</span></h1>
+        <p class="subtitle reveal">Premium kafa i luksuzan ambijent u srcu Kruševca.</p>
+        <a href="meni.html" class="section-card reveal" style="text-decoration: none; color: var(--gold); padding: 15px 40px; font-weight: bold; letter-spacing: 2px;">POGLEDAJ MENI</a>
+    </section>
+    <footer><p>© 2026 Arabika | Design by <span class="akcent">VelDeep</span></p></footer>
+    <script>
+        const menuBtn = document.getElementById('menuBtn');
+        const navLinks = document.getElementById('navLinks');
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            const spans = menuBtn.querySelectorAll('span');
+            spans[0].style.transform = navLinks.classList.contains('active') ? 'rotate(45deg) translate(5px, 6px)' : 'none';
+            spans[1].style.opacity = navLinks.classList.contains('active') ? '0' : '1';
+            spans[2].style.transform = navLinks.classList.contains('active') ? 'rotate(-45deg) translate(5px, -6px)' : 'none';
+        });
+        function reveal() {
+            var reveals = document.querySelectorAll(".reveal");
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var elementTop = reveals[i].getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) reveals[i].classList.add("active");
+            }
+        }
+        window.addEventListener("scroll", reveal); reveal();
+    </script>
+</body>
+</html>
